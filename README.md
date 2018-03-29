@@ -26,7 +26,7 @@ public class PlayerScripts : MonoBehaviour {
 
 	void FixedUpdate()
 	{
-		**GetComponent<Rigidbody2D> ().velocity = movement;**
+		GetComponent<Rigidbody2D> ().velocity = movement;
 	}
   ```
   rigibody2D在5.X版本经过了修改，使用会变得更加规范一些。在这里把rigibody2D的规范性没用好，通过查询资料明白5.x后的版本都要在rigibody前加个GetComponent。
