@@ -10,12 +10,8 @@ public class PlayerScripts : MonoBehaviour {
 	public float gravity;
 	public float jumpSpeed;
 
-	private float fallHeight;
-	private float jumproad;
-
 	private float hsp;
 	private float vsp;
-
 
 	private bool mid;
 	private bool isJump;
@@ -35,8 +31,7 @@ public class PlayerScripts : MonoBehaviour {
 	{
 		mid = false;
 		isJump = false;
-		fallHeight = 0f;
-		jumproad = 0f;
+
 	}
 		
 
@@ -82,26 +77,10 @@ public class PlayerScripts : MonoBehaviour {
 	void jump ()
 	{
 		if (keyJump && !isJump) {
-			transform.position = new Vector2 (transform.position.x, transform.position.y + jumpSpeed * Time.deltaTime);
-			jumproad += jumpSpeed * Time.deltaTime;
-			if (jumproad >= jumpHeight) {
-				isJump = true;
-			}
+			transform.position = new Vector2 (transform.position.x, transform.position.y + jumpHeight);
 		}
 	}
 
-	void fall ()
-	{
-		if (isJump) {
-			transform.position = new Vector2 (transform.position.x, transform.position.y - gravity * Time.deltaTime);
-			fallHeight += gravity * Time.deltaTime;
-		}
-		if ( fallHeight >= jumproad) {
-			isJump = false;
-			fallHeight = 0f;
-			jumproad = 0f;
-		}
-	}
 
 
 
@@ -110,7 +89,6 @@ public class PlayerScripts : MonoBehaviour {
 		getInput();
 		jump ();
 		move();
-		fall ();
 		if (keyAction) {
 			WeaponScript weapon = GetComponent<WeaponScript> ();
 			if (weapon != null) {

@@ -4,6 +4,18 @@ using UnityEngine;
 
 public class WeaponScript : MonoBehaviour {
 
+	private bool keyLeft;
+	private bool keyRight;
+	private bool keyUp;
+
+
+	void getInput(){
+		keyLeft = Input.GetKey(KeyCode.LeftArrow);
+		keyRight = Input.GetKey(KeyCode.RightArrow);
+		keyUp = Input.GetKey(KeyCode.UpArrow);
+	}
+
+
 	#region 
 
 	/// <summary>
@@ -50,6 +62,9 @@ public class WeaponScript : MonoBehaviour {
 				shot.isEnemyShot = isEnemy;
 			}
 			MoveScript move = shotTransform.gameObject.GetComponent<MoveScript> ();
+			Move1Script move1 = shotTransform.gameObject.GetComponent<Move1Script> ();
+			Move2Script move2 = shotTransform.gameObject.GetComponent<Move2Script> ();
+
 
 			if (move != null) {
 
@@ -60,7 +75,12 @@ public class WeaponScript : MonoBehaviour {
 				}
 				else 
 				{
-					move.direction.x = 1f;
+					if (keyUp)
+						move1.direction.y = 1f;
+					if (keyRight)
+						move.direction.x = 1f;
+					if (keyLeft)
+						move2.direction.x = 1f;
 					move.speed = new Vector2 (10, 10);
 				}
 			}
